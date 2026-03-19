@@ -1,9 +1,10 @@
-import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes
+import os
 
-BOT_TOKEN = "ВСТАВЬТЕ_СЮДА_ТОКЕН"
-CHANNEL_ID = "@ваш_канал"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
+IMAGE_URL = os.getenv("IMAGE_URL")
 
 CAPTION = """📌 ТЕСТ: НА ЧТО ВАМ СЕЙЧАС СТОИТ ОБРАТИТЬ ВНИМАНИЕ
 
@@ -29,7 +30,7 @@ def build_keyboard():
 async def post(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=CHANNEL_ID,
-        photo="https://i.postimg.cc/your-image.jpg",
+        photo=IMAGE_URL,
         caption=CAPTION,
         reply_markup=build_keyboard()
     )
